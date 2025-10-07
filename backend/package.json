@@ -3,25 +3,42 @@
   "version": "1.0.0",
   "type": "module",
   "main": "dist/index.js",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "concurrently -k \"tsc -w\" \"nodemon -q dist/index.js\"",
     "build": "rimraf dist && tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "typecheck": "tsc --noEmit",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "db:init": "npx prisma migrate dev --name init_user",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/client": "^6.17.0",
+    "argon2": "^0.44.0",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "lodash": "^4.17.21"
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "morgan": "^1.10.1",
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^24.7.0",
     "concurrently": "^9.1.0",
     "nodemon": "^3.1.7",
+    "prisma": "^6.17.0",
     "rimraf": "^6.0.1",
     "typescript": "^5.9.3"
   }
